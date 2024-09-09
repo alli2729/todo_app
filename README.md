@@ -1,3 +1,3 @@
-# todo
+# Todo App
 
-A new Flutter project.
+A simple todo application built with flutter
