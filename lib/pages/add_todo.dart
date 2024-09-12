@@ -3,22 +3,36 @@ import 'package:flutter/material.dart';
 class AddTodo extends StatelessWidget {
   AddTodo({super.key});
 
+  // controller
   final _todoController = TextEditingController();
+  // key for form
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _appBar(context),
       floatingActionButton: _backButton(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: _body(context),
+    );
+  }
+
+  //* widgets
+
+  PreferredSizeWidget _appBar(BuildContext context) {
+    return AppBar(
+      leading: IconButton(
+        onPressed: () => _back(context),
+        icon: const Icon(Icons.arrow_back),
+      ),
     );
   }
 
   Widget _backButton(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => _back(context),
-      child: const Icon(Icons.arrow_back),
+      onPressed: () => _submit(context),
+      child: const Icon(Icons.check),
     );
   }
 
@@ -37,31 +51,18 @@ class AddTodo extends StatelessWidget {
               validator: _todoValidate,
               autofocus: true,
               decoration: const InputDecoration(
-                label: Text('Todo'),
+                label: Text('Todo Title'),
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 16),
-            _submitButton(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _submitButton(BuildContext context) {
-    return InkWell(
-      onTap: () => _submit(context),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.grey),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        child: const Text("Submit"),
-      ),
-    );
-  }
+  //* functions
 
   String? _todoValidate(value) {
     if (value.isEmpty) return 'Todo is required';

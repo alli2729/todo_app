@@ -37,7 +37,7 @@ class _TodoPageState extends State<TodoPage> {
   Widget _body() {
     if (_todos.isEmpty) {
       return const Center(
-        child: Text('No Item', style: TextStyle(fontSize: 16)),
+        child: Text('No Item', style: TextStyle(fontSize: 18)),
       );
     }
 
